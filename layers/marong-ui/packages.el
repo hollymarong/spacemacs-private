@@ -1,15 +1,15 @@
 ;;; packages.el --- zilong-ui layer packages file for Spacemacs.
 ;;
-;; Copyright (c) 2014-2016 zilongshanren
+;; Copyright (c) 2014-2016 marong
 ;;
 ;; Author: guanghui <guanghui8827@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
+;; URL: https://github.com/marong/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
 
-(defconst zilongshanren-ui-packages
+(defconst marong-ui-packages
   '(
     (zilong-mode-line :location built-in)
     diminish
@@ -24,8 +24,8 @@
     )
   )
 
-(defun zilongshanren-ui/init-zilong-mode-line ()
-  (defun zilongshanren/display-mode-indent-width ()
+(defun marong-ui/init-zilong-mode-line ()
+  (defun marong/display-mode-indent-width ()
     (let ((mode-indent-level
            (catch 'break
              (dolist (test spacemacs--indent-variable-alist)
@@ -74,7 +74,7 @@
                           'face
                           'font-lock-type-face))
                  " "
-                 '(:eval (zilongshanren/update-persp-name))
+                 '(:eval (marong/update-persp-name))
 
                  "%1 "
                  ;; the buffer name; the file name as a tool tip
@@ -139,7 +139,7 @@
 
                  (mode-line-fill 'mode-line 20)
 
-                 '(:eval (zilongshanren/display-mode-indent-width))
+                 '(:eval (marong/display-mode-indent-width))
                  ;; line and column
                  " (" ;; '%02' to set to 2 chars at least; prevents flickering
                  (propertize "%02l" 'face 'font-lock-type-face) ","
@@ -156,7 +156,7 @@
                  ;;                             (emacs-uptime "Uptime:%hh"))))
                  )))
 
-(defun zilongshanren-ui/post-init-diminish ()
+(defun marong-ui/post-init-diminish ()
   (progn
     (with-eval-after-load 'whitespace
       (diminish 'whitespace-mode))
@@ -168,7 +168,7 @@
       (diminish 'hungry-delete-mode))))
 
 
-(defun zilongshanren-ui/post-init-spaceline ()
+(defun marong-ui/post-init-spaceline ()
   (use-package spaceline-config
     :config
     (progn
@@ -216,7 +216,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
       (setq-default mode-line-format '("%e" (:eval (spaceline-ml-zilong))))
       )))
 
-(defun zilongshanren-ui/init-beacon ()
+(defun marong-ui/init-beacon ()
   (use-package beacon
     :init
     (progn
@@ -230,7 +230,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
       (spacemacs/toggle-beacon-on))
     :config (spacemacs|hide-lighter beacon-mode)))
 
-(defun zilongshanren-ui/init-evil-vimish-fold ()
+(defun marong-ui/init-evil-vimish-fold ()
   (use-package evil-vimish-fold
     :init
     (vimish-fold-global-mode 1)
@@ -241,7 +241,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
       (define-key evil-normal-state-map (kbd "zd") 'vimish-fold-delete)
       (define-key evil-normal-state-map (kbd "za") 'vimish-fold-toggle))))
 
-(defun zilongshanren-ui/post-init-hl-anything ()
+(defun marong-ui/post-init-hl-anything ()
   (progn
     (defun my-inhibit-globalized-hl-highlight-mode ()
       "Counter-act a globalized hl-highlight-mode."
@@ -256,7 +256,7 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
       :documentation "Toggle highlight anything mode."
       :evil-leader "ths")))
 
-(defun zilongshanren-ui/post-init-pangu-spacing ()
+(defun marong-ui/post-init-pangu-spacing ()
   (progn
     ;; add toggle options
     (spacemacs|add-toggle toggle-pangu-spaceing
@@ -269,12 +269,12 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
               #'(lambda ()
                  (set (make-local-variable 'pangu-spacing-real-insert-separtor) t)))))
 
-(defun zilongshanren-ui/post-init-popwin ()
+(defun marong-ui/post-init-popwin ()
   (progn
-    (push "*zilongshanren/run-current-file output*" popwin:special-display-config)
+    (push "*marong/run-current-file output*" popwin:special-display-config)
     (delete "*Async Shell Command*" popwin:special-display-config)))
 
-(defun zilongshanren-ui/post-init-whitespace ()
+(defun marong-ui/post-init-whitespace ()
   (progn
     ;; ;; http://emacsredux.com/blog/2013/05/31/highlight-lines-that-exceed-a-certain-length-limit/
     (setq whitespace-line-column fill-column) ;; limit line length
@@ -291,7 +291,18 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
     ;; show tab;  use untabify to convert tab to whitespace
     (setq spacemacs-show-trailing-whitespace nil)
 
-    (setq-default tab-width 4)
+    (setq-default
+     standard-indent 2
+     indent-tabs-mode nil
+     js-indent-level 2
+     js2-basic-offset 2
+     js2-strict-semi-warning nil
+     js2-missing-semi-one-line-override nil
+     web-mode-markup-indent-offset 2
+     web-mode-css-indent-offset 2
+     web-mode-code-indent-offset 2
+     web-mode-indent-style 2
+     tab-width 2)
     ;; set-buffer-file-coding-system -> utf8 to convert dos to utf8
     ;; (setq inhibit-eol-conversion t)
     ;; (add-hook 'prog-mode-hook 'whitespace-mode)

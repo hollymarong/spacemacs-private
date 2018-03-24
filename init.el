@@ -65,14 +65,14 @@ values."
      deft
      markdown
      org
-     gpu
+     ;; gpu
      yaml
      react
      (python :variables
              python-test-runner '(nose pytest))
-     (ruby :variables ruby-version-manager 'chruby)
-     ruby-on-rails
-     lua
+     ;; (ruby :variables ruby-version-manager 'chruby)
+     ;; ruby-on-rails
+     ;; lua
      html
      javascript
      (typescript :variables
@@ -83,7 +83,7 @@ values."
      racket
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode)
-     zilongshanren
+     marong
      (chinese :packages youdao-dictionary fcitx
               :variables chinese-enable-fcitx nil
               chinese-enable-youdao-dict t)
@@ -174,8 +174,11 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
-                         solarized-dark)
+   dotspacemacs-themes '(
+                         solarized-dark
+                         spacemacs-dark
+                         spacemacs-light
+                         solarized-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -345,6 +348,8 @@ values."
 
   ;; https://github.com/syl20bnr/spacemacs/issues/2705
   ;; (setq tramp-mode nil)
+  (setenv "PATH" (concat (getenv "PATH") ":/Users/marong/.nvm/versions/node/v7.10.0/bin"))
+  (setq exec-path (append exec-path '("/Users/marong/.nvm/versions/node/v7.10.0/bin")))
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
@@ -379,7 +384,7 @@ values."
   (setq split-width-threshold 120)
   (linum-relative-on)
 
-  (spacemacs|add-company-backends :modes text-mode)
+  ;; (spacemacs|add-company-backends :modes text-mode)
 
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
@@ -422,12 +427,12 @@ values."
         (when (looking-at (concat "^" (make-string tab-width ?\ )))
           (replace-match "")))))
 
-  (defun zilongshanren/toggle-major-mode ()
+  (defun marong/toggle-major-mode ()
     (interactive)
     (if (eq major-mode 'fundamental-mode)
         (set-auto-mode)
       (fundamental-mode)))
-  (spacemacs/set-leader-keys "otm" 'zilongshanren/toggle-major-mode)
+  (spacemacs/set-leader-keys "otm" 'marong/toggle-major-mode)
 
   ;; (add-hook 'text-mode-hook 'spacemacs/toggle-spelling-checking-on)
 
@@ -449,6 +454,7 @@ values."
   )
 
 (setq custom-file (expand-file-name "custom.el" dotspacemacs-directory))
+(setq-default dotspacemacs-configuration-layers '(pdf-tools))
 (load custom-file 'no-error 'no-message)
 (defun dotspacemacs/emacs-custom-settings ()
   "Emacs custom settings.

@@ -1,15 +1,14 @@
-;;; packages.el --- zilongshanren Layer packages File for Spacemacs
+;;; packages.el --- marong Layer packages File for Spacemacs
 ;;
-;; Copyright (c) 2014-2016 zilongshanren
+;; Copyright (c) 2014-2016 marong
 ;;
-;; Author: zilongshanren <guanghui8827@gmail.com>
-;; URL: https://github.com/zilongshanren/spacemacs-private
+;; URL: https://github.com/marong/spacemacs-private
 ;;
 ;; This file is not part of GNU Emacs.
 ;;
 ;;; License: GPLv3
 
-(setq zilongshanren-misc-packages
+(setq marong-misc-packages
       '(
         projectile
         prodigy
@@ -45,12 +44,12 @@
         browse-at-remote
         ))
 
-(defun zilongshanren-misc/init-browse-at-remote ()
+(defun marong-misc/init-browse-at-remote ()
   (use-package browse-at-remote
     :defer t
     :init (spacemacs/set-leader-keys "gho" 'browse-at-remote)))
 
-(defun zilongshanren-misc/init-highlight-global ()
+(defun marong-misc/init-highlight-global ()
   (use-package highlight-global
     :init
     (progn
@@ -62,14 +61,14 @@
           ('hi-pink . 0)
           ('hi-blue-b . 0))))))
 
-(defun zilongshanren-misc/post-init-golden-ratio ()
+(defun marong-misc/post-init-golden-ratio ()
   (with-eval-after-load 'golden-ratio
     (dolist (mode '("dired-mode" "occur-mode"))
       (add-to-list 'golden-ratio-exclude-modes mode))
     (dolist (n '("COMMIT_EDITMSG"))
       (add-to-list 'golden-ratio-exclude-buffer-names n))))
 
-(defun zilongshanren-misc/post-init-ranger ()
+(defun marong-misc/post-init-ranger ()
   ;; https://emacs-china.org/t/ranger-golden-ratio/964/2
   (defun my-ranger ()
     (interactive)
@@ -97,7 +96,7 @@
   (spacemacs/set-leader-keys "ar" 'my-ranger))
 
 ;; copy from spacemacs helm layer
-(defun zilongshanren-misc/init-helm-ag ()
+(defun marong-misc/init-helm-ag ()
   (use-package helm-ag
     :defer t
     :init
@@ -406,13 +405,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         (kbd "gr") 'helm-ag--update-save-results
         (kbd "q") 'quit-window))))
 
-(defun zilongshanren-misc/post-init-hydra ()
+(defun marong-misc/post-init-hydra ()
   (progn
     (defhydra hydra-hotspots (:color blue)
       "Hotspots"
       ("b" blog-admin-start "blog")
       ("g" helm-github-stars "helm github stars")
-      ("r" zilongshanren/run-current-file "run current file"))
+      ("r" marong/run-current-file "run current file"))
 
     (defhydra multiple-cursors-hydra (:hint nil)
       "
@@ -465,7 +464,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     ))
 
-(defun zilongshanren-misc/post-init-gist ()
+(defun marong-misc/post-init-gist ()
   (use-package gist
     :defer t
     :init
@@ -500,7 +499,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         "." 'spacemacs/gist-list-mode-transient-state/body))
     ))
 
-(defun zilongshanren-misc/init-peep-dired ()
+(defun marong-misc/init-peep-dired ()
   ;;preview files in dired
   (use-package peep-dired
     :defer t
@@ -510,13 +509,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
                 ("P" . peep-dired))))
 
 
-(defun zilongshanren-misc/post-init-flyspell-correct ()
+(defun marong-misc/post-init-flyspell-correct ()
   (progn
     (with-eval-after-load 'flyspell
       (define-key flyspell-mode-map (kbd "C-;") 'flyspell-correct-previous-word-generic))
     (setq flyspell-correct-interface 'flyspell-correct-ivy)))
 
-(defun zilongshanren-misc/post-init-smartparens ()
+(defun marong-misc/post-init-smartparens ()
   (use-package smartparens
     :defer t
     :init
@@ -532,13 +531,13 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         (kbd "(>") 'sp-backward-barf-sexp
         (kbd "(<") 'sp-backward-slurp-sexp))))
 
-(defun zilongshanren-misc/init-tiny ()
+(defun marong-misc/init-tiny ()
   (use-package tiny
     :defer t
     :init
     (spacemacs/set-leader-keys "oe" 'tiny-expand)))
 
-(defun zilongshanren-misc/post-init-helm ()
+(defun marong-misc/post-init-helm ()
   (with-eval-after-load 'helm
     (progn
       ;; limit max number of matches displayed for speed
@@ -551,19 +550,19 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       )
     ))
 
-(defun zilongshanren-misc/init-helm-github-stars ()
+(defun marong-misc/init-helm-github-stars ()
   (use-package helm-github-stars
     :commands (helm-github-stars)
     :init
-    (setq helm-github-stars-username "zilongshanren")))
+    (setq helm-github-stars-username "marong")))
 
 
 
 
-(defun zilongshanren-misc/post-init-fcitx ()
+(defun marong-misc/post-init-fcitx ()
   (fcitx-aggressive-setup))
 
-(defun zilongshanren-misc/post-init-command-log ()
+(defun marong-misc/post-init-command-log ()
   (with-eval-after-load 'global-command-log-mode
     (setq clm/log-command-exceptions* (append clm/log-command-exceptions*
                                               '(evil-next-visual-line
@@ -571,12 +570,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 
 
-(defun zilongshanren-misc/init-litable ()
+(defun marong-misc/init-litable ()
   (use-package litable
     :init
     :defer t))
 
-(defun zilongshanren-misc/init-osx-dictionary ()
+(defun marong-misc/init-osx-dictionary ()
   (use-package osx-dictionary
     :init
     (progn
@@ -586,7 +585,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       )))
 
 
-(defun zilongshanren-misc/init-4clojure ()
+(defun marong-misc/init-4clojure ()
   (use-package 4clojure
     :init
     (progn
@@ -600,15 +599,15 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 
 
-(defun zilongshanren-misc/post-init-avy ()
+(defun marong-misc/post-init-avy ()
   (progn
     (global-set-key (kbd "C-s-'") 'avy-goto-char-2)
     (global-set-key (kbd "M-'") 'avy-goto-char-2)))
 
-(defun zilongshanren-misc/post-init-ace-window ()
+(defun marong-misc/post-init-ace-window ()
   (global-set-key (kbd "C-x C-o") #'ace-window))
 
-(defun zilongshanren-misc/init-discover-my-major ()
+(defun marong-misc/init-discover-my-major ()
   (use-package discover-my-major
     :defer t
     :init
@@ -618,7 +617,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       )))
 
 
-(defun zilongshanren-misc/post-init-elfeed ()
+(defun marong-misc/post-init-elfeed ()
   (use-package elfeed
     :init
     (global-set-key (kbd "C-x w") 'elfeed)
@@ -667,7 +666,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
       (ad-activate 'elfeed-show-yank))))
 
-(defun zilongshanren-misc/post-init-evil ()
+(defun marong-misc/post-init-evil ()
   (progn
     (setcdr evil-insert-state-map nil)
     (define-key evil-insert-state-map [escape] 'evil-normal-state)
@@ -706,7 +705,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-visual-state-map (kbd "y") 'my-evil-yank)
 
     (define-key evil-normal-state-map
-      (kbd "Y") 'zilongshanren/yank-to-end-of-line)
+      (kbd "Y") 'marong/yank-to-end-of-line)
 
     ;; rebind g,k to gj and gk
     ;; (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
@@ -737,7 +736,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key evil-visual-state-map (kbd ",/") 'evilnc-comment-or-uncomment-lines)
     ;; (define-key evil-visual-state-map (kbd "x") 'er/expand-region)
     ;; (define-key evil-visual-state-map (kbd "X") 'er/contract-region)
-    (define-key evil-visual-state-map (kbd "C-r") 'zilongshanren/evil-quick-replace)
+    (define-key evil-visual-state-map (kbd "C-r") 'marong/evil-quick-replace)
     (define-key evil-visual-state-map (kbd "mn") 'mc/mark-next-like-this)
     (define-key evil-visual-state-map (kbd "mp") 'mc/mark-previous-like-this)
     (define-key evil-visual-state-map (kbd "ma") 'mc/mark-all-like-this)
@@ -768,11 +767,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
           evil-motion-state-tag   (propertize "[M]" 'face '((:background "plum3") :foreground "white"))
           evil-visual-state-tag   (propertize "[V]" 'face '((:background "gray" :foreground "black")))
           evil-operator-state-tag (propertize "[O]" 'face '((:background "purple"))))
-    (setq evil-insert-state-cursor '("chartreuse3" box))
+    ;; (setq evil-insert-state-cursor '("chartreuse3" box))
+    (setq evil-insert-state-cursor '("chartreuse3" (bar . 2)))
     (define-key evil-insert-state-map (kbd "C-z") 'evil-emacs-state)
     ;; This will break visual column edit
     ;; enable hybrid editing style
-    ;; (defadvice evil-insert-state (around zilongshanren/holy-mode activate)
+    ;; (defadvice evil-insert-state (around marong/holy-mode activate)
     ;;   "Preparing the holy water flasks."
     ;;   (evil-emacs-state))
     ;; disable c-[ temporally
@@ -782,11 +782,11 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ;; (define-key evil-emacs-state-map [escape] 'evil-normal-state)
     ))
 
-(defun zilongshanren-misc/init-visual-regexp ()
+(defun marong-misc/init-visual-regexp ()
   (use-package visual-regexp
     :commands (vr/replace vr/query-replace)))
 
-(defun zilongshanren-misc/init-visual-regexp-steroids ()
+(defun marong-misc/init-visual-regexp-steroids ()
   (use-package visual-regexp-steroids
     :commands (vr/select-replace vr/select-query-replace)
     :init
@@ -794,7 +794,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (define-key global-map (kbd "C-c r") 'vr/replace)
       (define-key global-map (kbd "C-c q") 'vr/query-replace))))
 
-(defun zilongshanren-misc/init-multiple-cursors ()
+(defun marong-misc/init-multiple-cursors ()
   (use-package multiple-cursors
     :init
     (progn
@@ -829,7 +829,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (setq mc/cmds-to-run-once
           '(
             counsel-M-x
-            zilongshanren/my-mc-mark-next-like-this))
+            marong/my-mc-mark-next-like-this))
     (setq mc/cmds-to-run-for-all
           '(
             electric-newline-and-maybe-indent
@@ -867,7 +867,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
             orgtbl-hijacker-command-109))
     ))
 
-(defun zilongshanren-misc/post-init-persp-mode ()
+(defun marong-misc/post-init-persp-mode ()
   (setq persp-kill-foreign-buffer-action 'kill)
   (setq persp-lighter nil)
   (when (fboundp 'spacemacs|define-custom-layout)
@@ -878,7 +878,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (split-window-right)
       (find-file "~/cocos2d-x/cocos/cocos2d.cpp"))))
 
-(defun zilongshanren-misc/post-init-chinese-wbim ()
+(defun marong-misc/post-init-chinese-wbim ()
   (progn
     (bind-key* ";" 'chinese-wbim-insert-ascii)
     (setq chinese-wbim-punc-translate-p nil)
@@ -894,10 +894,10 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     ))
 
 
-(defun zilongshanren-misc/post-init-evil-escape ()
+(defun marong-misc/post-init-evil-escape ()
   (setq evil-escape-delay 0.2))
 
-(defun zilongshanren-misc/init-find-file-in-project ()
+(defun marong-misc/init-find-file-in-project ()
   (use-package find-file-in-project
     :defer t
     :config
@@ -931,7 +931,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 
 
-(defun zilongshanren-misc/post-init-projectile ()
+(defun marong-misc/post-init-projectile ()
   (progn
     (with-eval-after-load 'projectile
       (progn
@@ -949,12 +949,12 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (if (projectile-project-p)
           (multi-occur (projectile-project-buffers) my-simple-todo-regex)
         (occur my-simple-todo-regex)))
-    (spacemacs/set-leader-keys "pf" 'zilongshanren/open-file-with-projectile-or-counsel-git)
+    (spacemacs/set-leader-keys "pf" 'marong/open-file-with-projectile-or-counsel-git)
     (spacemacs/set-leader-keys "pt" 'my-simple-todo)))
 
 
 
-(defun zilongshanren-misc/post-init-prodigy ()
+(defun marong-misc/post-init-prodigy ()
   (progn
     (prodigy-define-tag
       :name 'jekyll
@@ -1017,14 +1017,14 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       :kill-process-buffer-on-stop t)
 
     (defun refresh-chrome-current-tab (beg end length-before)
-      (call-interactively 'zilongshanren/browser-refresh--chrome-applescript))
+      (call-interactively 'marong/browser-refresh--chrome-applescript))
     ;; add watch for prodigy-view-mode buffer change event
     (add-hook 'prodigy-view-mode-hook
               #'(lambda() (set (make-local-variable 'after-change-functions) #'refresh-chrome-current-tab)))
 
     ))
 
-(defun zilongshanren-misc/init-moz-controller ()
+(defun marong-misc/init-moz-controller ()
   (use-package moz-controller
     :init
     (progn
@@ -1032,16 +1032,16 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
       (spacemacs|hide-lighter moz-controller-mode))))
 
 
-(defun zilongshanren-misc/init-ag ()
+(defun marong-misc/init-ag ()
   (use-package ag
     :init))
 
-(defun zilongshanren-misc/post-init-erc ()
+(defun marong-misc/post-init-erc ()
   (progn
     (add-hook 'erc-text-matched-hook 'my-erc-hook)
     (spaceline-toggle-erc-track-off)))
 
-(defun zilongshanren-misc/init-wrap-region ()
+(defun marong-misc/init-wrap-region ()
   (use-package wrap-region
     :init
     (progn
@@ -1061,14 +1061,14 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
 
 
-(defun zilongshanren-misc/init-keyfreq ()
+(defun marong-misc/init-keyfreq ()
   (use-package keyfreq
     :init
     (progn
       (keyfreq-mode t)
       (keyfreq-autosave-mode 1))))
 
-(defun zilongshanren-misc/post-init-swiper ()
+(defun marong-misc/post-init-swiper ()
   "Initialize my package"
   (progn
     (setq ivy-use-virtual-buffers t)
@@ -1115,7 +1115,7 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
     (define-key global-map (kbd "C-s") 'my-swiper-search)))
 
 
-(defun zilongshanren-misc/post-init-magit ()
+(defun marong-misc/post-init-magit ()
   (progn
     (with-eval-after-load 'magit
       (progn
@@ -1140,18 +1140,18 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
 
     (eval-after-load 'magit
       '(define-key magit-mode-map (kbd "C-c g")
-         #'zilongshanren/magit-visit-pull-request))
+         #'marong/magit-visit-pull-request))
 
     (setq magit-process-popup-time 10)))
 
-(defun zilongshanren-misc/post-init-git-messenger ()
+(defun marong-misc/post-init-git-messenger ()
   (use-package git-messenger
     :defer t
     :config
     (progn
       (define-key git-messenger-map (kbd "f") 'zilong/github-browse-commit))))
 
-(defun zilongshanren-misc/post-init-markdown-mode ()
+(defun marong-misc/post-init-markdown-mode ()
   (progn
     (add-to-list 'auto-mode-alist '("\\.mdown\\'" . markdown-mode))
 
@@ -1161,9 +1161,9 @@ Search for a search tool in the order provided by `dotspacemacs-search-tools'."
         ;;   (spacemacs|add-company-hook markdown-mode))
 
         (spacemacs/set-leader-keys-for-major-mode 'gfm-mode-map
-          "p" 'zilongshanren/markdown-to-html)
+          "p" 'marong/markdown-to-html)
         (spacemacs/set-leader-keys-for-major-mode 'markdown-mode
-          "p" 'zilongshanren/markdown-to-html)
+          "p" 'marong/markdown-to-html)
 
         (evil-define-key 'normal markdown-mode-map (kbd "TAB") 'markdown-cycle)
         ))
